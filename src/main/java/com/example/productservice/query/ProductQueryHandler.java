@@ -7,14 +7,17 @@ import com.example.productservice.query.rest.ProductRestModel;
 import org.axonframework.queryhandling.QueryHandler;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Component
 public class ProductQueryHandler {
+    private final ProductRepository productRepository;
 
-    @Autowired
-    ProductRepository productRepository;
+    public ProductQueryHandler(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     @QueryHandler
     public List<ProductRestModel> findProduct(FindProductQuery query){
